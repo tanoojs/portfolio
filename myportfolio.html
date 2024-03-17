@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            color: #ededed;
+            background: #081b29;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 10%;
+            background: rgb(red, green, blue);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            position: relative;
+            font-size: 25px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: default;
+            opacity: 0;
+            animation: slideRight 1s ease forwards;
+        }
+
+        .navbar {
+            display: flex;
+            
+            
+        }
+
+        .navbar a {
+            font-size: 25px;
+            color: #fff;
+            background-color: rgb(red, green, blue);
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 35px;
+            transition: .3s;
+            opacity: 1;
+            
+        }
+
+        .navbar a:hover {
+            color: #0ef;
+            background-color: #fff;
+        }
+
+        .home {
+            position: relative;
+            width: 100%;
+            justify-content: space-between;
+            height: 100vh;
+            background: url(portfolio/images/Wallpaper2.jpg) no-repeat; 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            padding: 70px 10% 0;
+        }
+
+        .home-content {
+            max-width: 600px;
+        }
+
+        .home-content h3 {
+            font-size: 32px;
+            font-weight: 700;
+            opacity: 0;
+            animation: slideBottom 1s ease forwards;
+            animation-delay: .7s;
+        }
+
+        .home-content h3:nth-of-type(2) {
+            margin-bottom: 30px;
+            animation: slideTop 1s ease forwards;
+            animation-delay: .7s;
+        }
+
+        .home-content h3 span {
+            color: #0ef;
+        }
+
+        .home-content h1 {
+            font-size: 45px;
+            font-weight: 700;
+            margin: -3px 0;
+            opacity: 0;
+            animation: slideRight 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .home-content p {
+            font-size: 18px;
+            opacity: 0;
+            animation: slideLeft 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .home-sci a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 2px solid #0ef;
+            border-radius: 50%;
+            font-size: 20px;
+            color: #0ef;
+            text-decoration: none;
+            transition: .5s ease;
+            opacity: 0;
+            animation: slideLeft 1s ease forwards;
+            animation-delay: calc(.3s * var(--i));
+            margin: 30px 15px 30px 0;
+        }
+
+        .home-sci a:hover {
+            background: #0ef;
+            color: #081b29;
+            box-shadow: 0 0 20px #0ef;
+        }
+
+        .home-sci a img {
+            width: 70%;
+            height: 70%;
+            filter: brightness(150%);
+        }
+
+        .home-sci a:hover img {
+            filter: grayscale(200%);
+        }
+
+        .btn-box {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #0ef;
+            border-radius: 40px;
+            font-size: 16px;
+            color: #081b29;
+            letter-spacing: 1px;
+            text-decoration: none;
+            font-weight: 600;
+            opacity: 0;
+            animation: slideLeft 1s ease forwards;
+            animation-delay: 2s;
+            box-shadow: 0 0 5px #0ef, 0 0 25px #0ef;
+        }
+
+        .btn-box:hover {
+            box-shadow: 0 0 5px cyan, 0 0 25px cyan, 0 0 50px cyan, 0 0 100px cyan, 0 0 200px cyan;
+        }
+
+        .about {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            align-items: center;
+            gap: 1.5rem;
+            margin-top: 50px; /* Added margin */
+        }
+
+        .about-img img {
+            padding-bottom: 30%;
+            padding-left: 20%;
+            padding-top: 25%;
+           
+            height: 650px;
+            width: 70%;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            
+            
+            
+        }
+
+        .about-text h2 {
+            font-size: 60px;
+        }
+
+        .about-text h2 span {
+            color: #0ef;
+        }
+
+        .about-text h4 {
+            font-size: 29px;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.7;
+            margin: 15px 0 30px;
+        }
+
+        .about-text p {
+            color: aliceblue;
+            font-size: 20px;
+            line-height: 1.4;
+            margin-bottom: 4rem;
+        }
+
+        #skills {
+            color: aliceblue;
+            font-size: 20px;
+            line-height: 1.4;
+            margin-bottom: 20px; /* Reduced margin */
+        }
+
+        #sub-title {
+            text-align: center;
+            font-size: 50px;
+            padding-bottom: 30px; /* Reduced padding */
+        }
+
+        .container {
+            padding: 80px; /* Reduced padding */
+        }
+
+        .skills-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Three cards per row */
+            gap: 60px; /* Added gap between cards */
+            margin-top: 0px; /* Reduced margin */
+        }
+
+        .skills-list div {
+            background-color: transparent;
+            padding: 20px; /* Reduced padding */
+            font-size: 13px;
+            font-weight: 13px;
+            border-radius: 20px;
+            transition: background 0.5s, transform 0.5s;
+            box-shadow: 1px 1px 20px #012290f7, 1px 1px 40px #0053b8f7;
+        }
+
+        .skills-list div img {
+            font-size: 20px;
+            margin-top: px;
+        }
+
+        .skills-list div h3 {
+            font-size: 25px;
+            margin-bottom: 15px;
+            color: #0ef;
+        }
+
+        .skills-list div p {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .skills-list div:hover {
+            transform: translateY(-15px);
+            background: #012290f7;
+        }
+
+        @keyframes slideTop {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 0;
+            }
+        }
+
+        @keyframes slideBottom {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideLeft {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media(max-width: 1000px) {
+            .home-content h1 {
+                font-size: 38px;
+            }
+            .home-content h3 {
+                font-size: 26px;
+            }
+            .home-content p {
+                font-size: 16px;
+            }
+            .header {
+                padding: 20px 5%;
+            }
+            .navbar {
+                display: none;
+                opacity: 1;
+            }
+            .logo {
+                opacity: 1;
+            }
+            .navbar a {
+                opacity: 1;
+            }
+            .home-sci a {
+                opacity: 1;
+            }
+        }
+        footer {
+            background-color: #081b29;
+            color: #ededed;
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .col-md-6 {
+            flex: 0 0 48%;
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 200px;
+            padding: 10px;
+            background-color: #0ef;
+            border: none;
+            border-radius: 5px;
+            color: #081b29;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: cyan;
+        }
+
+        @media(max-width: 768px) {
+            .col-md-6 {
+                flex: 0 0 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo">Portfolio</a>
+        <nav class="navbar">
+            <a href="#home" style="--i: 1;">Home</a>
+            <a href="#about" style="--i: 2;">About</a>
+            <a href="#skills" style="--i: 3;">Skills</a>
+            <a href="#contact" style="--i: 4;">Contact</a>
+        </nav>
+    </header>
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <h3>Hello, It's Me</h3>
+            <h1><span>S.TANOOJ</span></h1>
+            <h3>Web Developer & Designer</h3>
+            <p>Welcome to my portfolio website. Feel free to explore!</p>
+            <div class="home-sci">
+                <!-- Replace Font Awesome icons with image URLs -->
+                <a href="#"><img src="icons/facebook.png" alt="Facebook"></a>
+                <a href="#"><img src="icons/whatsapp.png" alt="whatsapp"></a>
+                <a href="#"><img src="icons/instagram.png" alt="Insta"></a>
+                <a href="#"><img src="icons/mail.png" alt="Mail"></a>
+            </div>
+            <a href="#about" class="btn-box">More About Me</a>
+        </div>
+    </section>
+    
+    <section class="about" id="about">
+        <div class="about-img">
+            <img src="images/myimage-modified.png" alt="about image" width="20" height="20" >
+        </div>
+        <div class="about-text">
+            <h2>About <span>Me</span></h2>
+            <h4>Front-end Developer</h4>
+            <p>I am a passionate front-end developer with several years of experience creating responsive and user-friendly websites. My goal is to provide clean and efficient code to bring ideas to life on the web.</p>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h4 id="sub-title">My <span>Skills</span></h4>
+        <div class="container">
+            <div class="skills-list">
+                <div>
+                    <h3>HTML <img src="logos/html5logo.png" alt="Facebook"></h3>
+                    <p>I am proficient in HTML and can create well-structured and semantic markup for web pages.</p>
+                </div>
+                <div>
+                    <h3>CSS <img src="logos/css3logo.png" alt="Facebook"> </h3>
+                    <p>I have expertise in CSS and can style web pages to make them visually appealing and responsive.</p>
+                </div>
+                <div>
+                    <i class="fab fa-python"></i>
+                    <h3>Python <img src="logos/pythonlogo.png" alt="Facebook"></h3>
+                    <p>I am skilled in Python programming and can develop various applications and scripts using Python.</p>
+                </div>
+                <div>
+                    <i class="fab fa-java"></i>
+                    <h3>Java <img src="logos/javalogo.png" alt="Facebook"></h3>
+                    <p>I have experience in Java programming and can develop desktop, web, and mobile applications using Java.</p>
+                </div>
+                <div>
+                    <i class="fab fa-php"></i>
+                    <h3>PHP <img src="logos/phplogo.png" alt="Facebook"></h3>
+                    <p>I am proficient in PHP and can develop dynamic and interactive websites and web applications using PHP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Contact <span>Me</span></h2>
+                    <p>Feel free to reach out to me if you have any questions or inquiries. I'm always open to new opportunities and collaborations.</p>
+                </div>
+                <div class="col-md-6">
+                    <form action="#">
+                        <input type="text" name="name" placeholder="Your Name">
+                        <input type="email" name="email" placeholder="Your Email">
+                        <textarea name="message" placeholder="Your Message"></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>
